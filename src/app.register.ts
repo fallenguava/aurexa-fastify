@@ -14,7 +14,11 @@ export async function registerAppPlugins(
   jwtSecret: string,
 ): Promise<void> {
   await app.register(cors, {
-    origin: ["http://localhost:5173", "http://192.168.1.25:5173"],
+    origin: [
+      process.env.CORS_ORIGIN,
+      "http://localhost:5173",
+      "http://192.168.1.25:5173",
+    ].filter(Boolean) as string[],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   });

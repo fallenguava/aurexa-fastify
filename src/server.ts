@@ -29,32 +29,52 @@ const start = async (): Promise<void> => {
   validateEnv();
   try {
     const app = await buildApp();
-    
+
     // We must wait for Fastify to fully register all plugins and routes
     await app.ready();
-    
+
     // Start the server
     await app.listen({ port: PORT, host: HOST });
 
     // ---------------------------------------------------------
     // 🎨 Beautified Startup Sequence
     // ---------------------------------------------------------
-    console.log(`\n${colors.cyan}${colors.bold}====================================================${colors.reset}`);
-    console.log(`${colors.cyan}${colors.bold}              🚀 Aurexa API Server                 ${colors.reset}`);
-    console.log(`${colors.cyan}${colors.bold}====================================================${colors.reset}\n`);
+    console.log(
+      `\n${colors.cyan}${colors.bold}====================================================${colors.reset}`,
+    );
+    console.log(
+      `${colors.cyan}${colors.bold}              🚀 Aurexa API Server                 ${colors.reset}`,
+    );
+    console.log(
+      `${colors.cyan}${colors.bold}====================================================${colors.reset}\n`,
+    );
 
-    console.log(`${colors.green}${colors.bold}📡 Server Details:${colors.reset}`);
-    console.log(`   ${colors.bold}URL:${colors.reset}       ${colors.blue}http://${HOST}:${PORT}${colors.reset}`);
-    console.log(`   ${colors.bold}ENV:${colors.reset}       ${colors.yellow}${process.env.NODE_ENV || "development"}${colors.reset}`);
-    console.log(`   ${colors.bold}CORS:${colors.reset}      ${colors.yellow}http://localhost:5173${colors.reset}\n`);
+    console.log(
+      `${colors.green}${colors.bold}📡 Server Details:${colors.reset}`,
+    );
+    console.log(
+      `   ${colors.bold}URL:${colors.reset}       ${colors.blue}http://${HOST}:${PORT}${colors.reset}`,
+    );
+    console.log(
+      `   ${colors.bold}ENV:${colors.reset}       ${colors.yellow}${process.env.NODE_ENV || "development"}${colors.reset}`,
+    );
+    console.log(
+      `   ${colors.bold}CORS:${colors.reset}      ${colors.yellow}${process.env.CORS_ORIGIN || "localhost only"}${colors.reset}\n`,
+    );
 
-    console.log(`${colors.magenta}${colors.bold}🛣️  Available Endpoints:${colors.reset}`);
+    console.log(
+      `${colors.magenta}${colors.bold}🛣️  Available Endpoints:${colors.reset}`,
+    );
     // Fastify's built-in router tree printer
     console.log(`${colors.yellow}${app.printRoutes()}${colors.reset}`);
-    console.log(`${colors.cyan}${colors.bold}====================================================${colors.reset}\n`);
-
+    console.log(
+      `${colors.cyan}${colors.bold}====================================================${colors.reset}\n`,
+    );
   } catch (error) {
-    console.error(`\n${colors.red}${colors.bold}❌ Server failed to start:${colors.reset}\n`, error);
+    console.error(
+      `\n${colors.red}${colors.bold}❌ Server failed to start:${colors.reset}\n`,
+      error,
+    );
     process.exit(1);
   }
 };

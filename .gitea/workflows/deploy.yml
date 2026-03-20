@@ -1,0 +1,24 @@
+name: Deploy Aurexa Fastify
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        run: |
+          cd /home/dian/projects/aurexa/aurexa-fastify
+          git fetch origin main
+          git reset --hard origin/main
+
+      - name: Install dependencies
+        run: |
+          cd /home/dian/projects/aurexa/aurexa-fastify
+          npm install
+
+      - name: Restart service
+        run: sudo systemctl restart aurexa-fastify

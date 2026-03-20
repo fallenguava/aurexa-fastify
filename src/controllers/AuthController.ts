@@ -88,8 +88,8 @@ export const AuthController = {
 
       reply.setCookie("refreshToken", refreshToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         path: "/",
       });
 
@@ -168,8 +168,8 @@ export const AuthController = {
 
       reply.setCookie("refreshToken", newRefreshToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         path: "/",
       });
 
